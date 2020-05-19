@@ -1,7 +1,10 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="openSidebar()">
+  <button mat-icon-button (click)="onClickMenuButton()">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-icon svgIcon="day"></mat-icon>
   <span>任務管理平台</span>
+  <span class="fill-remain-space"></span>
+  <mat-slide-toggle (change)="onChangeSlideToggle($event)"
+    >深夜模式</mat-slide-toggle
+  >
 </mat-toolbar>

@@ -8,6 +8,7 @@ import { AppComponent } from './app.component'
 import { SharedModule } from './shared/shared.module'
 import { LoginModule } from './login/login.module'
 import { ProjectModule } from './project/project.module'
+import { TaskModule } from './task/task.module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { ProjectModule } from './project/project.module'
     SharedModule,
     LoginModule,
     ProjectModule,
+    TaskModule,
     BrowserAnimationsModule,
   ],
   providers: [],

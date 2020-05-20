@@ -10,8 +10,6 @@ export class RegisterComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.items = Array.from({ length: 16 }).map(
-      (_, i) => `avatars:svg-${i + 1}`
-    )
+    this.items = Array.from({ length: 16 }).map((_, i) => `avatar:svg-${i + 1}`)
   }
 }

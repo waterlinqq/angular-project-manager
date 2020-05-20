@@ -12,6 +12,11 @@ const routes: Routes = [
     redirectTo: '/project',
     pathMatch: 'full',
   },
+  {
+    path: 'tasklist',
+    redirectTo: '/tasklist',
+    pathMatch: 'full',
+  },
 ]
 
 @NgModule({

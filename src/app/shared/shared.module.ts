@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatGridListModule } from '@angular/material/grid-list'
+import { MatDialogModule } from '@angular/material/dialog'
 @NgModule({
   declarations: [],
   imports: [
@@ -22,6 +23,7 @@ import { MatGridListModule } from '@angular/material/grid-list'
     MatListModule,
     MatSlideToggleModule,
     MatGridListModule,
+    MatDialogModule,
   ],
   exports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { MatGridListModule } from '@angular/material/grid-list'
     MatListModule,
     MatSlideToggleModule,
     MatGridListModule,
+    MatDialogModule,
   ],
 })
 export class SharedModule {}

@@ -7,6 +7,11 @@ const routes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full',
   },
+  {
+    path: 'project',
+    redirectTo: '/project',
+    pathMatch: 'full',
+  },
 ]
 
 @NgModule({

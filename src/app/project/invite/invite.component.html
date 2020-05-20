@@ -1,1 +1,32 @@
-<p>invite works!</p>
+<form>
+  <h3 mat-dialog-title>邀請成員</h3>
+  <mat-dialog-content>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        type="text"
+        placeholder="請輸入項目名稱"
+        [matAutocomplete]="autoMembers"
+      />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="onInviteButtonClick()"
+    >
+      邀請
+    </button>
+    <button mat-dialog-close mat-raised-button type="button">關閉</button>
+  </mat-dialog-actions>
+  <mat-autocomplete
+    #autoMembers="matAutocomplete"
+    [displayWith]="displayUsername"
+  >
+    <mat-option *ngFor="let item of items" [value]="item">{{
+      item.name
+    }}</mat-option>
+  </mat-autocomplete>
+</form>

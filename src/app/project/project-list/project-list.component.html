@@ -2,6 +2,7 @@
   *ngFor="let project of projects"
   [item]="project"
   class="card"
+  (inviteEmt)="onInvite()"
 ></app-project-item>
 <button mat-fab (click)="onOpenDialog()" class="fab-button">
   <mat-icon>add</mat-icon>

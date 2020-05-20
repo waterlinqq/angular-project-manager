@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'app-project-item',
@@ -7,7 +7,11 @@ import { Component, OnInit, Input } from '@angular/core'
 })
 export class ProjectItemComponent implements OnInit {
   @Input() item
+  @Output() inviteEmt = new EventEmitter<void>()
   constructor() {}
 
   ngOnInit(): void {}
+  onInviteButtonClick() {
+    this.inviteEmt.emit()
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { NewTaskComponent } from '../new-task/new-task.component'
 import { CopyTaskComponent } from '../copy-task/copy-task.component'
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component'
 
 @Component({
   selector: 'app-task-home',
@@ -114,6 +115,11 @@ export class TaskHomeComponent implements OnInit {
   }
   onMoveTask() {
     this.dialogRef.open(CopyTaskComponent, { data: { lists: this.lists } })
+  }
+  onDeleteTask() {
+    this.dialogRef.open(ConfirmDialogComponent, {
+      data: { title: '確認刪除', content: '確認刪除該任務嗎？' },
+    })
   }
   onTaskClick(task) {
     this.dialogRef.open(NewTaskComponent, { data: { title: '修改任務', task } })

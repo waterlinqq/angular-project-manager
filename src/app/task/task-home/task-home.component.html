@@ -4,6 +4,7 @@
       [header]="list.name"
       (newTaskEmt)="onNewTask()"
       (moveTaskEmt)="onMoveTask()"
+      (deleteTaskEmt)="onDeleteTask()"
     ></app-task-header>
     <app-task-item
       *ngFor="let task of list.tasks"

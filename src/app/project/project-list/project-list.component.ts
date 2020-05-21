@@ -21,15 +21,16 @@ export class ProjectListComponent implements OnInit {
       coverImg: '/assets/img/covers/1.jpg',
     },
   ]
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialogRef: MatDialog) {}
 
   ngOnInit(): void {}
   onOpenDialog() {
-    const dialogRef = this.dialog.open(NewProjectComponent)
-    dialogRef.afterClosed()
+    this.dialogRef.open(NewProjectComponent, { data: { title: '創建項目' } })
   }
   onInvite() {
-    const dialogRef = this.dialog.open(InviteComponent)
-    dialogRef.afterClosed()
+    this.dialogRef.open(InviteComponent)
+  }
+  onEdit() {
+    this.dialogRef.open(NewProjectComponent, { data: { title: '編輯項目' } })
   }
 }

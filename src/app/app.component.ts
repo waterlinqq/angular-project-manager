@@ -7,7 +7,7 @@ const DARKTHEMECLASS = 'unicorn-dark-theme'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  darkTheme = false
+  darkTheme = true
   constructor(private oc: OverlayContainer) {}
   onToggleTheme(isDarkTheme) {
     this.darkTheme = isDarkTheme

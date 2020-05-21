@@ -9,10 +9,23 @@ import { MatIconRegistry } from '@angular/material/icon'
 import { SharedModule } from '../shared/shared.module'
 import { loadSvgResource } from '../utils/svg.util'
 
+import { AppRoutingModule } from '../app-routing.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 @NgModule({
   declarations: [HeaderComponent, SidebarComponent, FooterComponent],
-  imports: [HttpClientModule, SharedModule],
-  exports: [HeaderComponent, SidebarComponent, FooterComponent],
+  imports: [
+    HttpClientModule,
+    SharedModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+  ],
+  exports: [
+    HeaderComponent,
+    SidebarComponent,
+    FooterComponent,
+    AppRoutingModule,
+  ],
 })
 export class CoreModule {
   constructor(

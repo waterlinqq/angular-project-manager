@@ -1,10 +1,12 @@
 <mat-sidenav-container [class.unicorn-dark-theme]="darkTheme">
-  <mat-sidenav #sidenav><app-sidebar></app-sidebar></mat-sidenav>
+  <mat-sidenav #sidenav
+    ><app-sidebar (routeClickEmt)="sidenav.toggle()"></app-sidebar
+  ></mat-sidenav>
   <mat-sidenav-content>
     <div class="site">
       <header>
         <app-header
-          (toggleMenuEmt)="sidenav.open()"
+          (toggleMenuEmt)="sidenav.toggle()"
           (toggleThemeEmt)="onToggleTheme($event)"
         >
         </app-header>

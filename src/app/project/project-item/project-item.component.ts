@@ -7,7 +7,7 @@ import {
   HostBinding,
   HostListener,
 } from '@angular/core'
-import { cardAnim } from 'src/app/anims/card.anims'
+import { cardAnim } from 'src/app/anims/card.anim'
 
 @Component({
   selector: 'app-project-item',

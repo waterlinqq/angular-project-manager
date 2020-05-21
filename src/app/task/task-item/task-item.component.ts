@@ -6,7 +6,7 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core'
-import { itemAnim } from '../../anims/item.anims'
+import { itemAnim } from '../../anims/item.anim'
 
 @Component({
   selector: 'app-task-item',

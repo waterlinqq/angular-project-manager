@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { NewProjectComponent } from '../new-project/new-project.component'
 import { InviteComponent } from '../invite/invite.component'
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component'
 
 @Component({
   selector: 'app-project-list',
@@ -32,5 +33,11 @@ export class ProjectListComponent implements OnInit {
   }
   onEdit() {
     this.dialogRef.open(NewProjectComponent, { data: { title: '編輯項目' } })
+  }
+  onDelete() {
+    const dialogRef = this.dialogRef.open(ConfirmDialogComponent, {
+      data: { title: '刪除項目', content: '確認刪除該項目嗎？' },
+    })
+    dialogRef.afterClosed().subscribe(console.log)
   }
 }

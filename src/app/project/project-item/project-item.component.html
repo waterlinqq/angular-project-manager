@@ -15,7 +15,12 @@
       <mat-icon>group_add</mat-icon>
       <span>邀請</span>
     </button>
-    <button mat-button type="button" class="fab-button">
+    <button
+      mat-button
+      type="button"
+      class="fab-button"
+      (click)="onDeleteButtonClick()"
+    >
       <mat-icon>delete</mat-icon>
       <span>刪除</span>
     </button>

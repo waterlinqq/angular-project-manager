@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
+import { NewTaskComponent } from '../new-task/new-task.component'
 
 @Component({
   selector: 'app-task-home',
@@ -103,7 +105,10 @@ export class TaskHomeComponent implements OnInit {
       ],
     },
   ]
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
+  onNewTask() {
+    this.dialog.open(NewTaskComponent)
+  }
 }

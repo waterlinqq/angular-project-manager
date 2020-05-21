@@ -5,6 +5,7 @@
       (newTaskEmt)="onNewTask()"
       (moveTaskEmt)="onMoveTask()"
       (deleteTaskEmt)="onDeleteTask()"
+      (editTaskListEmt)="onEditTaskList()"
     ></app-task-header>
     <app-task-item
       *ngFor="let task of list.tasks"
@@ -13,6 +14,6 @@
     ></app-task-item>
   </app-task-list>
 </div>
-<button mat-fab class="fab-button">
+<button mat-fab class="fab-button" (click)="onNewTaskList()">
   <mat-icon>add</mat-icon>
 </button>

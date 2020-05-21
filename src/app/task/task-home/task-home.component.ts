@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { NewTaskComponent } from '../new-task/new-task.component'
 import { CopyTaskComponent } from '../copy-task/copy-task.component'
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component'
+import { NewTaskListComponent } from '../new-task-list/new-task-list.component'
 
 @Component({
   selector: 'app-task-home',
@@ -123,5 +124,17 @@ export class TaskHomeComponent implements OnInit {
   }
   onTaskClick(task) {
     this.dialogRef.open(NewTaskComponent, { data: { title: '修改任務', task } })
+  }
+  onEditTaskList() {
+    const dialogRef = this.dialogRef.open(NewTaskListComponent, {
+      data: { title: '編輯列表' },
+    })
+    dialogRef.afterClosed().subscribe(console.log)
+  }
+  onNewTaskList() {
+    const dialogRef = this.dialogRef.open(NewTaskListComponent, {
+      data: { title: '創建列表' },
+    })
+    dialogRef.afterClosed().subscribe(console.log)
   }
 }

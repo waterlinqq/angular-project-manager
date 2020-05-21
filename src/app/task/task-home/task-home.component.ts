@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { NewTaskComponent } from '../new-task/new-task.component'
+import { CopyTaskComponent } from '../copy-task/copy-task.component'
 
 @Component({
   selector: 'app-task-home',
@@ -105,10 +106,16 @@ export class TaskHomeComponent implements OnInit {
       ],
     },
   ]
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialogRef: MatDialog) {}
 
   ngOnInit(): void {}
   onNewTask() {
-    this.dialog.open(NewTaskComponent)
+    this.dialogRef.open(NewTaskComponent, { data: { title: '創建任務' } })
+  }
+  onMoveTask() {
+    this.dialogRef.open(CopyTaskComponent, { data: { lists: this.lists } })
+  }
+  onTaskClick(task) {
+    this.dialogRef.open(NewTaskComponent, { data: { title: '修改任務', task } })
   }
 }

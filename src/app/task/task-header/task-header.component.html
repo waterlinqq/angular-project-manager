@@ -18,7 +18,7 @@
       <mat-icon>mode_edit</mat-icon>
       <span>修改列表名稱</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="onMoveButtonClick()">
       <mat-icon [svgIcon]="'move'"></mat-icon>
       <span>移動本列表所有內容</span>
     </button>

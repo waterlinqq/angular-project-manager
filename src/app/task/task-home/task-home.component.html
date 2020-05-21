@@ -3,10 +3,12 @@
     <app-task-header
       [header]="list.name"
       (newTaskEmt)="onNewTask()"
+      (moveTaskEmt)="onMoveTask()"
     ></app-task-header>
     <app-task-item
       *ngFor="let task of list.tasks"
       [item]="task"
+      (taskItemClickEmt)="onTaskClick(task)"
     ></app-task-item>
   </app-task-list>
 </div>

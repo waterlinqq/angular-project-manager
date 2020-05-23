@@ -1,16 +1,39 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form, $event)">
   <mat-card class="example-card">
     <mat-card-header>
       <mat-card-title>登陸</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="請輸入信箱" />
+        <input
+          matInput
+          type="text"
+          placeholder="請輸入信箱"
+          formControlName="email"
+        />
+        <mat-error>
+          {{ form.controls['email'].errors | json }}
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput type="password" placeholder="請輸入密碼" />
+        <input
+          matInput
+          type="password"
+          placeholder="請輸入密碼"
+          formControlName="password"
+        />
+        <mat-error>
+          {{ form.controls['password'].errors | json }}
+        </mat-error>
       </mat-form-field>
-      <button mat-raised-button type="button" color="accent">提交</button>
+      <button
+        mat-raised-button
+        type="submit"
+        color="accent"
+        [disabled]="!form.valid"
+      >
+        提交
+      </button>
     </mat-card-content>
     <mat-card-actions class="text-right">
       <p>還沒有帳號<a routerLink="/register">註冊</a></p>

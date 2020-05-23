@@ -55,3 +55,8 @@ mat-icon.avatar {
   color: #d9d9d9;
   text-decoration: line-through;
 }
+
+.drag-start {
+  border: #ff525b dashed 2px;
+  opacity: 0.5;
+}

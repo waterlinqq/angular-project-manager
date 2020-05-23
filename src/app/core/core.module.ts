@@ -8,6 +8,7 @@ import { MatIconRegistry } from '@angular/material/icon'
 
 import { SharedModule } from '../shared/shared.module'
 import { loadSvgResource } from '../utils/svg.util'
+// import 'rxjs/add/operator/take'
 
 import { AppRoutingModule } from '../app-routing.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'

@@ -140,4 +140,17 @@ export class TaskHomeComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe(console.log)
   }
+  onDrop(srcData, list) {
+    switch (srcData.tag) {
+      case 'task-item':
+        console.log('handle item')
+        break
+      case 'task-list':
+        const srcList = srcData.data
+        const tmpOrder = srcList.order
+        srcList.order = list.order
+        list.order = tmpOrder
+        break
+    }
+  }
 }

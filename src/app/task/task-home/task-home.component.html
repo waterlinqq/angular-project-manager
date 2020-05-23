@@ -19,6 +19,8 @@
       (deleteTaskEmt)="onDeleteTask()"
       (editTaskListEmt)="onEditTaskList()"
     ></app-task-header>
+    <app-quick-task (quickTaskEmt)="onQuickTask($event)"></app-quick-task>
+
     <app-task-item
       *ngFor="let task of list.tasks"
       [item]="task"

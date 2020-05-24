@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
+import { QuoteService } from 'src/app/service/quote.service'
+import { Quote } from 'src/app/domain/quote.model'
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,14 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   form: FormGroup
-  constructor(private fb: FormBuilder) {}
+  quote: Quote = {
+    en: 'loremadfasdfadf',
+    cn: 'loremasfaga',
+    pic: '/assets/img/quotes/0.jpg',
+  }
+  constructor(private fb: FormBuilder, private quoteService$: QuoteService) {
+    this.quoteService$.getQuote().subscribe((q) => (this.quote = q))
+  }
 
   ngOnInit() {
     this.form = this.fb.group({

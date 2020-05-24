@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
 
 import { SharedModule } from '../shared/shared.module'
+import { ServiceModule } from '../service/service.module'
 import { loadSvgResource } from '../utils/svg.util'
 // import 'rxjs/add/operator/take'
 
@@ -20,12 +21,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ServiceModule.forRoot(),
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
     AppRoutingModule,
+  ],
+  providers: [
+    {
+      provide: 'BASE_CONFIG',
+      useValue: {
+        uri: 'http://localhost:3000',
+      },
+    },
   ],
 })
 export class CoreModule {

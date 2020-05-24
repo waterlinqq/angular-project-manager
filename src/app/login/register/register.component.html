@@ -1,27 +1,54 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form, $event)">
   <mat-card class="example-card">
     <mat-card-header>
       <mat-card-title>註冊</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="請輸入姓名" />
+        <input
+          matInput
+          type="text"
+          placeholder="請輸入姓名"
+          formControlName="name"
+        />
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="請輸入信箱" />
+        <input
+          matInput
+          type="text"
+          placeholder="請輸入信箱"
+          formControlName="email"
+        />
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput type="password" placeholder="請輸入密碼" />
+        <input
+          matInput
+          type="password"
+          placeholder="請輸入密碼"
+          formControlName="password"
+        />
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput type="password" placeholder="請再次輸入密碼" />
+        <input
+          matInput
+          type="password"
+          placeholder="請再次輸入密碼"
+          formControlName="confirmPassword"
+        />
       </mat-form-field>
-      <mat-grid-list cols="6" rowsHeight="1:1">
+      <app-image-list-select
+        [useSvgIcon]="true"
+        [cols]="6"
+        [title]="'選擇頭像'"
+        [items]="items"
+        formControlName="avatar"
+      ></app-image-list-select>
+      <!-- <mat-grid-list cols="6" rowsHeight="1:1">
         <mat-grid-tile *ngFor="let item of items">
           <mat-icon [svgIcon]="item"></mat-icon>
         </mat-grid-tile>
-      </mat-grid-list>
-      <button mat-raised-button type="button" color="accent">提交</button>
+      </mat-grid-list> -->
+      <button mat-raised-button type="submit" color="accent">註冊</button>
     </mat-card-content>
 
     <mat-card-actions class="text-right">

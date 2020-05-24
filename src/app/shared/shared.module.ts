@@ -22,9 +22,10 @@ import { MatSelectModule } from '@angular/material/select'
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component'
 
 import { DirectiveModule } from '../directive/directive.module'
+import { ImageListSelectComponent } from './image-list-select/image-list-select.component'
 
 @NgModule({
-  declarations: [ConfirmDialogComponent],
+  declarations: [ConfirmDialogComponent, ImageListSelectComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -48,6 +49,7 @@ import { DirectiveModule } from '../directive/directive.module'
     MatNativeDateModule,
     MatSelectModule,
     DirectiveModule,
+    // ImageListSelectComponent, why does it make an error
   ],
   exports: [
     CommonModule,
@@ -72,6 +74,7 @@ import { DirectiveModule } from '../directive/directive.module'
     MatNativeDateModule,
     MatSelectModule,
     DirectiveModule,
+    ImageListSelectComponent,
   ],
 })
 export class SharedModule {}

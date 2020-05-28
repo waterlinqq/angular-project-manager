@@ -4,15 +4,10 @@
       "id": 1,
       "name": "專案一",
       "desc": "這是一個專案",
-      "coverImg": "/assets/img/covers/0.jpg",
-      "members": ["1"]
-    },
-    {
-      "id": 2,
-      "name": "專案二",
-      "desc": "這還是一個專案",
-      "coverImg": "/assets/img/covers/1.jpg",
-      "members": ["1", "2"]
+      "coverImg": "/assets/img/covers/3.jpg",
+      "members": [
+        "1"
+      ]
     }
   ],
   "quotes": [

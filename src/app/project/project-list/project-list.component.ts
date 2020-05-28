@@ -1,5 +1,7 @@
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import * as _ from 'lodash'
+
 import { NewProjectComponent } from '../new-project/new-project.component'
 import { InviteComponent } from '../invite/invite.component'
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component'
@@ -8,6 +10,7 @@ import { listAnim } from 'src/app/anims/list.anim'
 import { Project } from 'src/app/domain'
 import { ProjectService } from 'src/app/service/project.service'
 import { Subscription } from 'rxjs'
+import { filter, switchMap, map, take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-project-list',
@@ -32,33 +35,72 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     }
   }
   onOpenDialog() {
+    const selectedImg = `/assets/img/covers/${Math.floor(
+      Math.random() * 40
+    )}_tn.jpg`
     const dialogRef = this.dialogRef.open(NewProjectComponent, {
-      data: { title: '創建項目' },
+      data: { thumbnails: this.getThumbnails(), img: selectedImg },
     })
-    dialogRef.afterClosed().subscribe((result) => {
-      // console.log(result)
-      // const newProject = {
-      //   id: 3,
-      //   name: '專案三',
-      //   desc: '這還是一個專案',
-      //   coverImg: '/assets/img/covers/2.jpg',
-      // }
-      // this.projects = [...this.projects, newProject ]
-    })
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter((n) => n),
+        map((val) => ({ ...val, coverImg: this.buildImgSrc(val.coverImg) })),
+        switchMap((v) => this.service$.add(v))
+      )
+      .subscribe((prj) => {
+        this.projects = [...this.projects, prj]
+      })
   }
   onInvite() {
     this.dialogRef.open(InviteComponent)
   }
-  onEdit() {
-    this.dialogRef.open(NewProjectComponent, { data: { title: '編輯項目' } })
+  onEdit(project: Project) {
+    const dialogRef = this.dialogRef.open(NewProjectComponent, {
+      data: { thumbnails: this.getThumbnails(), project },
+    })
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter((n) => n),
+        map((val) => ({
+          ...val,
+          id: project.id,
+          coverImg: this.buildImgSrc(val.coverImg),
+        })),
+        switchMap((v) => this.service$.update(v))
+      )
+      .subscribe((prj) => {
+        const idx = this.projects.findIndex((p) => p.id === prj.id)
+        this.projects = [
+          ...this.projects.slice(0, idx),
+          prj,
+          ...this.projects.slice(idx + 1),
+        ]
+      })
   }
   onDelete(project) {
     const dialogRef = this.dialogRef.open(ConfirmDialogComponent, {
       data: { title: '刪除項目', content: '確認刪除該項目嗎？' },
     })
-    dialogRef.afterClosed().subscribe((result) => {
-      // this.projects = this.projects.filter((prj) => prj.id !== project.id)
-      this.projects.pop()
-    })
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter((n) => n),
+        switchMap((n) => this.service$.delete(project))
+      )
+      .subscribe((prj) => {
+        this.projects = this.projects.filter((p) => p.id !== prj.id)
+      })
+  }
+  private getThumbnails() {
+    return _.range(0, 40).map((i) => `/assets/img/covers/${i}_tn.jpg`)
+  }
+  private buildImgSrc(img: string): string {
+    return img.indexOf('_') > -1 ? img.split('_')[0] + '.jpg' : img
   }
 }

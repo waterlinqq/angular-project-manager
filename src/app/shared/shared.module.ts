@@ -19,14 +19,20 @@ import { MatRadioModule } from '@angular/material/radio'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core'
 import { MatSelectModule } from '@angular/material/select'
+import { MatChipsModule } from '@angular/material/chips'
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component'
 
 import { DirectiveModule } from '../directive/directive.module'
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component'
+import { ChipsListComponent } from './chips-list/chips-list.component'
 // import { AgeInputComponent } from './age-input/age-input.component'
 
 @NgModule({
-  declarations: [ConfirmDialogComponent, ImageListSelectComponent],
+  declarations: [
+    ConfirmDialogComponent,
+    ImageListSelectComponent,
+    ChipsListComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -49,6 +55,7 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatChipsModule,
     DirectiveModule,
     // ImageListSelectComponent, why does it make an error
   ],
@@ -74,7 +81,10 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatChipsModule,
     DirectiveModule,
+    ChipsListComponent,
+
     ImageListSelectComponent,
   ],
 })

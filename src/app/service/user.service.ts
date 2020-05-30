@@ -15,11 +15,11 @@ export class UserService {
     private http: HttpClient,
     @Inject('BASE_CONFIG') private config
   ) {}
-  searchUsers(fil: string): Observable<User> {
+  searchUsers(fil: string): Observable<User[]> {
     const uri = `${this.config.uri}/${this.domain}`
     return this.http
       .get(uri, { params: { email_like: fil } })
-      .pipe(map((res) => res as User))
+      .pipe(map((res) => res as User[]))
   }
   getUsersByProject(projectId: string): Observable<User[]> {
     const uri = `${this.config.uri}/${this.domain}`

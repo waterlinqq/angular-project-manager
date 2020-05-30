@@ -9,6 +9,7 @@ import { MatIconRegistry } from '@angular/material/icon'
 import { SharedModule } from '../shared/shared.module'
 import { ServiceModule } from '../service/service.module'
 import { AppStoreModule } from '../reducers'
+import { AppEffectsModule } from '../effects'
 import { loadSvgResource } from '../utils/svg.util'
 import '../utils/debug.util'
 
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     BrowserAnimationsModule,
     AppStoreModule,
     ServiceModule.forRoot(),
+    AppEffectsModule,
   ],
   exports: [
     HeaderComponent,

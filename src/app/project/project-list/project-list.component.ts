@@ -91,6 +91,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
         this.store$.dispatch(new actions.DeleteProjectAction(project))
       })
   }
+  onSelect(project: Project) {
+    this.store$.dispatch(new actions.SelectProjectAction(project))
+  }
   private getThumbnails() {
     return _.range(0, 40).map((i) => `/assets/img/covers/${i}_tn.jpg`)
   }

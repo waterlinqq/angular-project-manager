@@ -1,6 +1,6 @@
 <div class="task-lists">
   <app-task-list
-    *ngFor="let list of lists"
+    *ngFor="let list of lists$ | async"
     class="list-container"
     [style]="{ order: list.order }"
     [appDraggable]="true"
@@ -16,8 +16,8 @@
       [header]="list.name"
       (newTaskEmt)="onNewTask()"
       (moveTaskEmt)="onMoveTask()"
-      (deleteTaskEmt)="onDeleteTask()"
-      (editTaskListEmt)="onEditTaskList()"
+      (deleteTaskEmt)="onDeleteTask(list)"
+      (editTaskListEmt)="onEditTaskList(list)"
     ></app-task-header>
     <app-quick-task (quickTaskEmt)="onQuickTask($event)"></app-quick-task>
 
@@ -28,6 +28,6 @@
     ></app-task-item>
   </app-task-list>
 </div>
-<button mat-fab class="fab-button" (click)="onNewTaskList()">
+<button mat-fab class="fab-button" (click)="onNewTaskList($event)">
   <mat-icon>add</mat-icon>
 </button>

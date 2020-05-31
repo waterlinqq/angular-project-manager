@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { TaskList, Task } from '../domain'
+import { TaskList, Task, Project } from '../domain'
 import { map, mapTo, reduce } from 'rxjs/operators'
-import { Observable, concat } from 'rxjs'
+import { Observable, concat, merge } from 'rxjs'
 
 @Injectable()
 export class TaskListService {
@@ -15,7 +15,6 @@ export class TaskListService {
     @Inject('BASE_CONFIG') private config
   ) {}
   add(taskList: TaskList): Observable<TaskList> {
-    taskList.id = null
     const uri = `${this.config.uri}/${this.domain}`
     return this.http.post(uri, taskList).pipe(map((res) => res as TaskList))
   }
@@ -46,6 +45,19 @@ export class TaskListService {
     const drop$ = this.http.patch(dropUri, JSON.stringify({ order: src.order }))
     return concat(drag$, drop$).pipe(
       reduce((arrs, list) => [...arrs, list], [])
+    )
+  }
+  initializeTaskLists(prj: Project): Observable<Project> {
+    const id = prj.id
+    return merge(
+      this.add({ name: '待處理', projectId: id, order: 1 }),
+      this.add({ name: '進行中', projectId: id, order: 2 }),
+      this.add({ name: '已完成', projectId: id, order: 3 })
+    ).pipe(
+      reduce((r, x) => {
+        return [...r, x]
+      }, []),
+      map((tls) => ({ ...prj, taskLists: tls.map((tl) => tl.id) }))
     )
   }
 }

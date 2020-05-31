@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Action, Store } from '@ngrx/store'
+import { Router } from '@angular/router'
 
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
@@ -9,9 +10,9 @@ import * as actions from '../actions/project.action'
 // import * as tasklistActions from '../actions/task-list.action';
 // import * as userActions from '../actions/user.action';
 import * as fromRoot from '../reducers'
+import * as listActions from '../actions/task-list.action'
 import { Project, Auth } from '../domain'
 import { map, withLatestFrom, switchMap, catchError, tap } from 'rxjs/operators'
-import { Router } from '@angular/router'
 
 @Injectable()
 export class ProjectEffects {
@@ -52,7 +53,6 @@ export class ProjectEffects {
   @Effect()
   updateProject$: Observable<Action> = this.actions$.pipe(
     ofType(actions.ActionTypes.UPDATE),
-    tap(console.log),
     map((action) => (action as any).payload),
     switchMap((project) =>
       this.service$.update(project).pipe(
@@ -76,13 +76,17 @@ export class ProjectEffects {
       )
     )
   )
-  // @Effect()
-  // selectProject$: Observable<Action> = this.actions$.pipe(
-  //   ofType(actions.ActionTypes.SELECT),
-  //   tap((project) =>
-  //     this.router.navigate([`/tasklists/${(project as any).id}`])
-  //   )
-  // )
+  @Effect()
+  selectProject$: Observable<Action> = this.actions$.pipe(
+    ofType(actions.ActionTypes.SELECT),
+    map((action) => (action as any).payload),
+    tap((project) =>
+      this.router.navigate([`/tasklist/${(project as any).id}`])
+    ),
+    map(
+      (project) => new listActions.LoadTaskListsAction((project as Project).id)
+    )
+  )
 
   @Effect()
   invite$: Observable<Action> = this.actions$.pipe(

@@ -20,6 +20,7 @@ export class ProjectItemComponent implements OnInit {
   @Output() inviteEmt = new EventEmitter<void>()
   @Output() editEmt = new EventEmitter<void>()
   @Output() deleteEmt = new EventEmitter<void>()
+  @Output() selectEmt = new EventEmitter<void>()
   @HostBinding('@card') cardState = 'out'
   constructor() {}
 
@@ -32,13 +33,19 @@ export class ProjectItemComponent implements OnInit {
   onMouseLeave() {
     this.cardState = 'out'
   }
-  onInviteButtonClick() {
+  onInviteButtonClick(ev: Event) {
+    ev.stopPropagation()
     this.inviteEmt.emit()
   }
-  onEditButtonClick() {
+  onEditButtonClick(ev: Event) {
+    ev.stopPropagation()
     this.editEmt.emit()
   }
-  onDeleteButtonClick() {
+  onDeleteButtonClick(ev: Event) {
+    ev.stopPropagation()
     this.deleteEmt.emit()
+  }
+  onItemClick() {
+    this.selectEmt.emit()
   }
 }

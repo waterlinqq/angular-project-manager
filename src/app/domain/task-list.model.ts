@@ -2,6 +2,6 @@ export interface TaskList {
   id?: string
   name: string
   order: number
-  taskIds: string[]
+  taskIds?: string[]
   projectId: string
 }

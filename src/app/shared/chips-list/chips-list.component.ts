@@ -61,7 +61,7 @@ export class ChipsListComponent implements OnInit, ControlValueAccessor {
 
   writeValue(obj: User[]): void {
     if (obj && this.multiple) {
-      const userEntitles = obj.reduce(
+      const userEntities = obj.reduce(
         (e, c) => ({
           ...e,
           c,
@@ -69,7 +69,7 @@ export class ChipsListComponent implements OnInit, ControlValueAccessor {
         {}
       )
       if (this.items) {
-        const remaining = this.items.filter((item) => !userEntitles[item.id])
+        const remaining = this.items.filter((item) => !userEntities[item.id])
         this.items = [...remaining, ...obj]
       }
     } else if (obj && !this.multiple) {

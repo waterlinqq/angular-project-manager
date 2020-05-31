@@ -42,9 +42,9 @@
   "projects": [
     {
       "id": 1,
-      "name": "專案一",
-      "desc": "這是一個專案",
-      "coverImg": "/assets/img/covers/3.jpg",
+      "name": "專案一 編碼",
+      "desc": "這是一個大專案",
+      "coverImg": "/assets/img/covers/4.jpg",
       "members": [
         "1"
       ]

@@ -7,22 +7,26 @@ import { createSelector } from 'reselect'
 
 import * as fromQuote from './quote.reducer'
 import * as fromAuth from './auth.reducer'
+import * as fromProjects from './project.reducer'
 import { compose } from '@ngrx/core'
 import { evironment } from '../environments/environment'
 
 export interface State {
   quote: fromQuote.State
   auth: fromAuth.State
+  projects: fromProjects.State
 }
 
 const initialState: State = {
   quote: fromQuote.initialState,
   auth: fromAuth.initialState,
+  projects: fromProjects.initialState,
 }
 
 const reducers = {
   quote: fromQuote.reducer,
   auth: fromAuth.reducer,
+  projects: fromProjects.reducer,
 }
 // const productionReducers: ActionReducer<State> = combineReducers(reducers)
 // const developmentReducers: ActionReducer<State> = compose(
@@ -36,10 +40,11 @@ const reducers = {
 //     : developmentReducers(state, action)
 // }
 
-const getQuoteState = (state: State) => state.quote
+export const getQuoteState = (state: State) => state.quote
 export const getAuthState = (state: State) => state.auth
+export const getProjectsState = (state: State) => state.projects
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote)
-
+export const getProjects = createSelector(getProjectsState, fromProjects.getAll)
 @NgModule({
   imports: [
     StoreModule.forRoot(reducers),

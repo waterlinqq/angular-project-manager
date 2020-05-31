@@ -1,5 +1,7 @@
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { Store } from '@ngrx/store'
+import { filter, switchMap, map, take } from 'rxjs/operators'
 import * as _ from 'lodash'
 
 import { NewProjectComponent } from '../new-project/new-project.component'
@@ -8,9 +10,10 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 import { routeAnim } from 'src/app/anims/route.anim'
 import { listAnim } from 'src/app/anims/list.anim'
 import { Project } from 'src/app/domain'
-import { ProjectService } from 'src/app/service/project.service'
-import { Subscription } from 'rxjs'
-import { filter, switchMap, map, take } from 'rxjs/operators'
+import { Subscription, from } from 'rxjs'
+import * as fromRoot from '../../reducers'
+import * as actions from '../../actions/project.action'
+import { Observable } from 'rxjs/Observable'
 
 @Component({
   selector: 'app-project-list',
@@ -20,20 +23,19 @@ import { filter, switchMap, map, take } from 'rxjs/operators'
 })
 export class ProjectListComponent implements OnInit, OnDestroy {
   @HostBinding('@route') state
-  projects: Project[]
-  sub: Subscription
-  constructor(private dialogRef: MatDialog, private service$: ProjectService) {}
+  projects$: Observable<Project[]>
+  listAnim$: Observable<number>
+  constructor(
+    private dialogRef: MatDialog,
+    private store$: Store<fromRoot.State>
+  ) {
+    this.store$.dispatch(new actions.LoadProjectsAction(null))
+    this.projects$ = this.store$.select(fromRoot.getProjects)
+    this.listAnim$ = this.projects$.pipe(map((p) => p.length))
+  }
 
-  ngOnInit(): void {
-    this.sub = this.service$
-      .get('1')
-      .subscribe((projects) => (this.projects = projects))
-  }
-  ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe()
-    }
-  }
+  ngOnInit(): void {}
+  ngOnDestroy() {}
   onOpenDialog() {
     const selectedImg = `/assets/img/covers/${Math.floor(
       Math.random() * 40
@@ -47,11 +49,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       .pipe(
         take(1),
         filter((n) => n),
-        map((val) => ({ ...val, coverImg: this.buildImgSrc(val.coverImg) })),
-        switchMap((v) => this.service$.add(v))
+        map((val) => ({ ...val, coverImg: this.buildImgSrc(val.coverImg) }))
       )
       .subscribe((prj) => {
-        this.projects = [...this.projects, prj]
+        this.store$.dispatch(new actions.AddProjectAction(prj))
       })
   }
   onInvite() {
@@ -70,16 +71,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
           ...val,
           id: project.id,
           coverImg: this.buildImgSrc(val.coverImg),
-        })),
-        switchMap((v) => this.service$.update(v))
+        }))
       )
       .subscribe((prj) => {
-        const idx = this.projects.findIndex((p) => p.id === prj.id)
-        this.projects = [
-          ...this.projects.slice(0, idx),
-          prj,
-          ...this.projects.slice(idx + 1),
-        ]
+        this.store$.dispatch(new actions.UpdateProjectAction(prj))
       })
   }
   onDelete(project) {
@@ -90,11 +85,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       .afterClosed()
       .pipe(
         take(1),
-        filter((n) => n),
-        switchMap((n) => this.service$.delete(project))
+        filter((n) => n)
       )
-      .subscribe((prj) => {
-        this.projects = this.projects.filter((p) => p.id !== prj.id)
+      .subscribe((_) => {
+        this.store$.dispatch(new actions.DeleteProjectAction(project))
       })
   }
   private getThumbnails() {

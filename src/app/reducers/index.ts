@@ -37,7 +37,7 @@ const reducers = {
 // }
 
 const getQuoteState = (state: State) => state.quote
-const getAuthState = (state: State) => state.auth
+export const getAuthState = (state: State) => state.auth
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote)
 
 @NgModule({

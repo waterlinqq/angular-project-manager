@@ -11,7 +11,7 @@ export class AuthService {
     'Content-Type': 'application/json',
   })
 
-  private token = ''
+  private token = '12345'
   constructor(
     private http: HttpClient,
     @Inject('BASE_CONFIG') private config

@@ -4,9 +4,11 @@
       "password": 123456,
       "name": "小清",
       "avatar": "avarta:svg-2",
-      "email": "abc@124",
+      "email": "123@abc.com",
       "id": "1",
-      "projectIds": ["1"]
+      "projectIds": [
+        "1"
+      ]
     },
     {
       "password": 123456,
@@ -14,7 +16,9 @@
       "avatar": "avarta:svg-3",
       "email": "sdfdc@124",
       "id": "2",
-      "projectIds": ["1"]
+      "projectIds": [
+        "1"
+      ]
     },
     {
       "password": 123456,
@@ -22,7 +26,17 @@
       "avatar": "avarta:svg-4",
       "email": "qqq@124",
       "id": "3",
-      "projectIds": ["1"]
+      "projectIds": [
+        "1"
+      ]
+    },
+    {
+      "name": "dd",
+      "email": "dd@dd.com",
+      "password": "dd",
+      "confirmPassword": "dd",
+      "avatar": "avatar:svg-10",
+      "id": "rSUenoL"
     }
   ],
   "projects": [
@@ -31,7 +45,9 @@
       "name": "專案一",
       "desc": "這是一個專案",
       "coverImg": "/assets/img/covers/3.jpg",
-      "members": ["1"]
+      "members": [
+        "1"
+      ]
     }
   ],
   "taskLists": [],

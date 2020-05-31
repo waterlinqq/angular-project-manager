@@ -14,8 +14,11 @@ export class QuoteEffects {
   quote$: Observable<Action> = this.actions$.pipe(
     ofType(actions.ActionTypes.LOAD),
     // map((action) => (action as any).payload),
-    switchMap((_) => this.service$.getQuote()),
-    map((q) => new actions.LoadSuccessAction(q)),
-    catchError((err) => of(new actions.LoadFailAction(JSON.stringify(err))))
+    switchMap((_) =>
+      this.service$.getQuote().pipe(
+        map((q) => new actions.LoadSuccessAction(q)),
+        catchError((err) => of(new actions.LoadFailAction(JSON.stringify(err))))
+      )
+    )
   )
 }

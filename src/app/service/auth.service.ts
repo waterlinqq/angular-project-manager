@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'
 
 @Injectable()
 export class AuthService {
-  private readonly domain = 'projects'
+  private readonly domain = 'users'
   private headers = new Headers({
     'Content-Type': 'application/json',
   })
@@ -19,11 +19,10 @@ export class AuthService {
 
   // POST
   register(user: User): Observable<Auth> {
-    user.id = null
     const uri = `${this.config.uri}/${this.domain}`
     return this.http.get(uri, { params: { email: user.email } }).pipe(
       switchMap((val) => {
-        if (JSON.stringify(val).length > 0) {
+        if ((val as User[]).length > 0) {
           throw Error('user existed')
         }
         return this.http
@@ -38,7 +37,7 @@ export class AuthService {
     const uri = `${this.config.uri}/${this.domain}`
     return this.http.get(uri, { params: { email: username, password } }).pipe(
       map((res) => {
-        if (JSON.stringify(res).length === 0) {
+        if ((res as []).length === 0) {
           throw Error('username or password not match')
         }
         return {

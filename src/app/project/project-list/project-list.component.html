@@ -3,7 +3,7 @@
     *ngFor="let project of projects$ | async"
     [item]="project"
     class="card"
-    (inviteEmt)="onInvite()"
+    (inviteEmt)="onInvite(project)"
     (editEmt)="onEdit(project)"
     (deleteEmt)="onDelete(project)"
     (selectEmt)="onSelect(project)"

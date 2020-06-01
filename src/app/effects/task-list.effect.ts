@@ -6,7 +6,7 @@ import { of } from 'rxjs/observable/of'
 import { TaskListService } from '../service/task-list.service'
 import * as actions from '../actions/task-list.action'
 import * as prjActions from '../actions/project.action'
-// import * as taskActions from '../actions/task.action'
+import * as taskActions from '../actions/task.action'
 import * as fromRoot from '../reducers'
 import { Task, TaskList } from '../domain'
 import { map, switchMap, catchError, tap } from 'rxjs/operators'
@@ -126,12 +126,12 @@ export class TaskListEffects {
     )
   )
 
-  // @Effect()
-  // loadTasksInList$: Observable<Action> = this.actions$.pipe(
-  //   ofType(actions.ActionTypes.LOADS_SUCCESS),
-  //   map((action) => (action as any).payload),
-  //   // map((lists) => new taskActions.LoadTaskListsAction(lists))
-  // )
+  @Effect()
+  loadTasksInList$: Observable<Action> = this.actions$.pipe(
+    ofType(actions.ActionTypes.LOADS_SUCCESS),
+    map((action) => (action as any).payload),
+    map((lists) => new taskActions.LoadTasksInListsAction(lists))
+  )
 
   constructor(
     private actions$: Actions,

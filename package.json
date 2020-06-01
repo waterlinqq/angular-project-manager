@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "server": "npx json-server ./mock/data.json",
+    "server": "npx json-server -w ./mock/data.json",
     "start": "concurrently 'ng serve' 'npm run server' ",
     "build": "ng build",
     "test": "ng test",

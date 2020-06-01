@@ -14,12 +14,12 @@
   >
     <app-task-header
       [header]="list.name"
-      (newTaskEmt)="onNewTask()"
-      (moveTaskEmt)="onMoveTask()"
-      (deleteTaskEmt)="onDeleteTask(list)"
+      (newTaskEmt)="onNewTask(list)"
+      (moveTaskEmt)="onMoveTask(list)"
+      (deleteTaskListEmt)="onDeleteTaskList(list)"
       (editTaskListEmt)="onEditTaskList(list)"
     ></app-task-header>
-    <app-quick-task (quickTaskEmt)="onQuickTask($event)"></app-quick-task>
+    <app-quick-task (quickTaskEmt)="onQuickTask($event, list)"></app-quick-task>
 
     <app-task-item
       *ngFor="let task of list.tasks"

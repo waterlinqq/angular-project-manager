@@ -1,10 +1,15 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSubmit($event, form)">
   <h3 mat-dialog-title>{{ title }}：</h3>
   <div mat-dialog-content>
     <mat-form-field class="full-width">
-      <input matInput type="text" placeholder="任務內容" />
+      <input
+        matInput
+        type="text"
+        placeholder="任務內容"
+        formControlName="desc"
+      />
     </mat-form-field>
-    <mat-radio-group>
+    <mat-radio-group formControlName="priority">
       <mat-radio-button
         *ngFor="let priority of priorities"
         [value]="priority.value"
@@ -12,12 +17,20 @@
         {{ priority.label }}
       </mat-radio-button>
     </mat-radio-group>
+    <div class="full-width">
+      <app-chips-list
+        [label]="'更改執行者'"
+        [multiple]="false"
+        formControlName="owner"
+      ></app-chips-list>
+    </div>
     <mat-form-field class="full-width">
       <input
         matInput
         type="text"
         placeholder="截止日期"
         [matDatepicker]="dueDatepicker"
+        formControlName="dueDate"
       />
       <mat-datepicker-toggle
         matSuffix
@@ -31,6 +44,7 @@
         type="text"
         placeholder="提醒日期"
         [matDatepicker]="reminderDatepicker"
+        formControlName="reminder"
       />
       <mat-datepicker-toggle
         matSuffix
@@ -38,8 +52,25 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #reminderDatepicker></mat-datepicker>
     </mat-form-field>
+    <div class="full-width">
+      <app-chips-list
+        [label]="'更改參與者'"
+        [multiple]="true"
+        formControlName="followers"
+      ></app-chips-list>
+    </div>
+    <mat-form-field class="full-width">
+      <textarea matInput placeholder="備註" formControlName="remark"></textarea>
+    </mat-form-field>
     <mat-dialog-actions>
-      <button mat-raised-button color="primary" type="button">保存</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        保存
+      </button>
       <button mat-dialog-close mat-button type="button">關閉</button>
     </mat-dialog-actions>
   </div>

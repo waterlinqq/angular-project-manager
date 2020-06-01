@@ -55,8 +55,28 @@ export class ProjectListComponent implements OnInit, OnDestroy {
         this.store$.dispatch(new actions.AddProjectAction(prj))
       })
   }
-  onInvite() {
-    this.dialogRef.open(InviteComponent, { data: { members: [] } })
+  onInvite(project: Project) {
+    this.store$
+      .select(fromRoot.getProjectUsers(project.id))
+      .pipe(
+        map((users) =>
+          this.dialogRef.open(InviteComponent, { data: { members: [] } })
+        ),
+        switchMap((dialogRef) =>
+          dialogRef.afterClosed().pipe(
+            take(1),
+            filter((n) => n)
+          )
+        )
+      )
+      .subscribe((val) =>
+        this.store$.dispatch(
+          new actions.InviteMembersAction({
+            projectId: project.id,
+            members: val,
+          })
+        )
+      )
   }
   onEdit(project: Project) {
     const dialogRef = this.dialogRef.open(NewProjectComponent, {

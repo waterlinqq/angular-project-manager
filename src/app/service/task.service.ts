@@ -6,7 +6,7 @@ import { Observable, from } from 'rxjs'
 
 @Injectable()
 export class TaskService {
-  private readonly domain = 'projects'
+  private readonly domain = 'tasks'
   private headers = new Headers({
     'Content-Type': 'application/json',
   })
@@ -17,11 +17,10 @@ export class TaskService {
 
   // POST
   add(task: Task): Observable<Task> {
-    task.id = null
     const uri = `${this.config.uri}/${this.domain}`
     return this.http
-      .post(uri, JSON.stringify(task))
-      .pipe(map((res) => res as Task))
+      .post(uri, task)
+      .pipe(map(({ id }: { id: string }) => ({ ...task, id } as Task)))
   }
 
   // PUT
@@ -43,7 +42,6 @@ export class TaskService {
   // DELETE
   delete(task: Task): Observable<Task> {
     const uri = `${this.config.uri}/taskLists/${task.id}`
-    task.id = null
     return this.http.delete(uri).pipe(mapTo(task))
   }
 

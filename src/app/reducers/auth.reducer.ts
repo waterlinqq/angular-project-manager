@@ -1,7 +1,7 @@
 import * as actions from '../actions/auth.action'
-
-export interface State {}
-export const initialState: State = {}
+import { Auth } from '../domain'
+export type State = Auth
+export const initialState: Auth = {}
 
 export function reducer(state = initialState, action: actions.Actions): State {
   switch (action.type) {

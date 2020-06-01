@@ -25,9 +25,12 @@ export class AuthService {
         if ((val as User[]).length > 0) {
           throw Error('user existed')
         }
-        return this.http
-          .post(uri, user)
-          .pipe(map((res) => ({ token: this.token, user: user as User })))
+        return this.http.post(uri, user).pipe(
+          map(({ id }: { id: string }) => ({
+            token: this.token,
+            user: { ...user, id } as User,
+          }))
+        )
       })
     )
   }
